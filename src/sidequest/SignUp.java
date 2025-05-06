@@ -122,7 +122,7 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jComboBox1.setForeground(new java.awt.Color(12, 21, 52));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Taga utos", "Utusan" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employer", "Employee" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
