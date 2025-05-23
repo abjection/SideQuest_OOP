@@ -161,6 +161,10 @@ public class Login extends javax.swing.JFrame {
                 String storedPassword = rs.getString("password");
                 if (storedPassword.equals(enteredPassword)) {
                     JOptionPane.showMessageDialog(this, "Login successful!");
+                    App appFrame = new App();
+                    appFrame.setVisible(true);
+                    appFrame.pack();
+                    appFrame.setLocationRelativeTo(null);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Incorrect password.");
