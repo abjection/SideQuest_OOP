@@ -10,10 +10,10 @@ public class SignUp extends javax.swing.JFrame {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SignUp SignUpFrame = new SignUp();
-                SignUpFrame.setVisible(true);
-                SignUpFrame.pack();
-                SignUpFrame.setLocationRelativeTo(null);
+                SignUp signUpFrame = new SignUp();
+                signUpFrame.setVisible(true);
+                signUpFrame.pack();
+                signUpFrame.setLocationRelativeTo(null);
             }
         });
     }

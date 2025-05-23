@@ -1,6 +1,8 @@
 package sidequest;
 
 public class App extends javax.swing.JFrame {
+    
+    private UserProfile userProfileFrame;
 
     public App() {
         initComponents();
@@ -21,7 +23,7 @@ public class App extends javax.swing.JFrame {
         jBsearchbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 800));
+        setMaximumSize(new java.awt.Dimension(2000, 800));
 
         jPanel1.setBackground(new java.awt.Color(12, 21, 52));
         jPanel1.setPreferredSize(new java.awt.Dimension(1200, 800));
@@ -33,7 +35,12 @@ public class App extends javax.swing.JFrame {
         jTFsearchbar.setText("Search");
 
         usericon_deleteme.setForeground(new java.awt.Color(255, 255, 255));
-        usericon_deleteme.setText("UserIcon_Placeholder");
+        usericon_deleteme.setText("usericon_placeholder");
+        usericon_deleteme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usericon_deletemeMouseClicked(evt);
+            }
+        });
 
         placeholder_deleteme1.setText("mainpanel_placeholder_toberemoved");
 
@@ -122,9 +129,7 @@ public class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(800, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,6 +145,18 @@ public class App extends javax.swing.JFrame {
         // TODO 
         // gawing icon yung button or okay na yung search 
     }//GEN-LAST:event_jBsearchbuttonActionPerformed
+
+    private void usericon_deletemeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usericon_deletemeMouseClicked
+        if (userProfileFrame == null || !userProfileFrame.isVisible()) {
+            userProfileFrame = new UserProfile();
+            userProfileFrame.setVisible(true);
+            userProfileFrame.pack();
+            userProfileFrame.setLocationRelativeTo(null);
+        } else {
+            userProfileFrame.toFront();
+            userProfileFrame.requestFocus();
+        }
+    }//GEN-LAST:event_usericon_deletemeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -168,13 +185,12 @@ public class App extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new App().setVisible(true);
             }
         });
-    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBsearchbutton;

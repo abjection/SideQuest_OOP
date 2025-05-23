@@ -6,9 +6,9 @@ public class SideQuest {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login LoginFrame = new Login();
-                LoginFrame.setLocationRelativeTo(null);
-                LoginFrame.setVisible(true);
+                Login loginFrame = new Login();
+                loginFrame.setLocationRelativeTo(null);
+                loginFrame.setVisible(true);
             }
         });
     }
