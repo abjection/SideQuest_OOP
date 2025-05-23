@@ -6,6 +6,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class SignUp extends javax.swing.JFrame {
+    
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SignUp SignUpFrame = new SignUp();
+                SignUpFrame.setVisible(true);
+                SignUpFrame.pack();
+                SignUpFrame.setLocationRelativeTo(null);
+            }
+        });
+    }
 
     public SignUp() {
         initComponents();
@@ -23,7 +34,6 @@ public class SignUp extends javax.swing.JFrame {
         jTFemail = new javax.swing.JTextField();
         label_phonenumber = new javax.swing.JLabel();
         jTFphonenumber = new javax.swing.JTextField();
-        jCBcountrycode = new javax.swing.JComboBox<>();
         label_address = new javax.swing.JLabel();
         jTFaddress = new javax.swing.JTextField();
         label_password = new javax.swing.JLabel();
@@ -73,25 +83,14 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        jCBcountrycode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+1 (US)", "+44 (UK)", "+63 (PH)", "+81 (JP)", "+91 (IN)" }));
-        jCBcountrycode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBcountrycodeActionPerformed(evt);
-            }
-        });
-
         label_address.setForeground(new java.awt.Color(12, 21, 52));
         label_address.setText("Address");
 
         label_password.setForeground(new java.awt.Color(12, 21, 52));
         label_password.setText("Password");
 
-        jPpassword.setText("EnterPassword");
-
         jLabel2.setForeground(new java.awt.Color(12, 21, 52));
         jLabel2.setText("Confirm Password");
-
-        jPasswordField2.setText("EnterPassword");
 
         jBsignup.setText("Sign Up");
         jBsignup.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +129,7 @@ public class SignUp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(label_fullname)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(label_gender)
@@ -139,7 +138,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(label_email)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFemail, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTFemail))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,25 +157,22 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(label_phonenumber)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCBcountrycode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFphonenumber))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFphonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(label_address)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTFaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(label_login)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBlogin)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBsignup))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_address)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFaddress))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_login)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBlogin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBsignup)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +192,6 @@ public class SignUp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_phonenumber)
-                    .addComponent(jCBcountrycode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFphonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -254,12 +249,6 @@ public class SignUp extends javax.swing.JFrame {
     private void jTFemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFemailActionPerformed
-
-    private void jCBcountrycodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBcountrycodeActionPerformed
-        String selectedCountryCode = (String) jCBcountrycode.getSelectedItem();
-        String numericCode = selectedCountryCode.replaceAll("[^\\d]", "");
-        jTFphonenumber.setText("(+" + numericCode + ")");
-    }//GEN-LAST:event_jCBcountrycodeActionPerformed
 
     private void jTFphonenumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFphonenumberActionPerformed
         // TODO add your handling code here:
@@ -328,7 +317,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBlogin;
     private javax.swing.JButton jBsignup;
-    private javax.swing.JComboBox<String> jCBcountrycode;
     private javax.swing.JComboBox<String> jCBgender;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
