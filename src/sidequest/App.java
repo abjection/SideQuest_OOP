@@ -4,9 +4,11 @@ public class App extends javax.swing.JFrame {
     
     private UserProfile userProfileFrame;
     private String currentUsername;
+    private String currentUserRole;
 
-    public App(String username) {
+    public App(String username, String userRole) {
         this.currentUsername = username;
+        this.currentUserRole = userRole;
         initComponents();
     }
 
@@ -150,7 +152,7 @@ public class App extends javax.swing.JFrame {
 
     private void usericon_deletemeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usericon_deletemeMouseClicked
         if (userProfileFrame == null || !userProfileFrame.isVisible()) {
-            userProfileFrame = new UserProfile(currentUsername);
+            userProfileFrame = new UserProfile(currentUsername, currentUserRole);
             userProfileFrame.setVisible(true);
             userProfileFrame.pack();
             userProfileFrame.setLocationRelativeTo(null);
@@ -189,7 +191,7 @@ public class App extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new App("test_user").setVisible(true);
+                new App("test_user", "Employee").setVisible(true);
             }
         });
 }

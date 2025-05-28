@@ -39,17 +39,17 @@ public class SignUp extends javax.swing.JFrame {
         jTFaddress = new javax.swing.JTextField();
         label_password = new javax.swing.JLabel();
         jPpassword = new javax.swing.JPasswordField();
-        jLabel2 = new javax.swing.JLabel();
+        label_confirmpassword = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
         jBsignup = new javax.swing.JButton();
         label_username = new javax.swing.JLabel();
         jTFusername = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        label_userrole = new javax.swing.JLabel();
         jCBgender = new javax.swing.JComboBox<>();
         label_gender = new javax.swing.JLabel();
         label_login = new javax.swing.JLabel();
         jBlogin = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBuserrole = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +57,7 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.setRequestFocusEnabled(false);
 
+        label_fullname.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_fullname.setForeground(new java.awt.Color(12, 21, 52));
         label_fullname.setText("Full Name");
 
@@ -66,6 +67,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        label_email.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_email.setForeground(new java.awt.Color(12, 21, 52));
         label_email.setText("Email Address");
 
@@ -75,6 +77,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        label_phonenumber.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_phonenumber.setForeground(new java.awt.Color(12, 21, 52));
         label_phonenumber.setText("Phone Number");
 
@@ -84,15 +87,19 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        label_address.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_address.setForeground(new java.awt.Color(12, 21, 52));
         label_address.setText("Address");
 
+        label_password.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_password.setForeground(new java.awt.Color(12, 21, 52));
         label_password.setText("Password");
 
-        jLabel2.setForeground(new java.awt.Color(12, 21, 52));
-        jLabel2.setText("Confirm Password");
+        label_confirmpassword.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_confirmpassword.setForeground(new java.awt.Color(12, 21, 52));
+        label_confirmpassword.setText("Confirm Password");
 
+        jBsignup.setForeground(new java.awt.Color(255, 255, 255));
         jBsignup.setText("Sign Up");
         jBsignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,20 +107,26 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        label_username.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_username.setForeground(new java.awt.Color(12, 21, 52));
         label_username.setText("Username");
 
-        jLabel1.setForeground(new java.awt.Color(12, 21, 52));
-        jLabel1.setText("What do?");
+        label_userrole.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_userrole.setForeground(new java.awt.Color(12, 21, 52));
+        label_userrole.setText("User Role");
 
+        jCBgender.setForeground(new java.awt.Color(255, 255, 255));
         jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Prefer not to say" }));
 
+        label_gender.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_gender.setForeground(new java.awt.Color(12, 21, 52));
         label_gender.setText("Gender");
 
+        label_login.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         label_login.setForeground(new java.awt.Color(12, 21, 52));
         label_login.setText("I have an account");
 
+        jBlogin.setForeground(new java.awt.Color(255, 255, 255));
         jBlogin.setText("Login");
         jBlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,8 +134,8 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setForeground(new java.awt.Color(12, 21, 52));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employer", "Employee" }));
+        jCBuserrole.setForeground(new java.awt.Color(255, 255, 255));
+        jCBuserrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employer", "Employee" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,7 +154,7 @@ public class SignUp extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFemail))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(label_confirmpassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -160,9 +173,9 @@ public class SignUp extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFphonenumber))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(label_userrole)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBuserrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(label_address)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,12 +221,12 @@ public class SignUp extends javax.swing.JFrame {
                     .addComponent(jPpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(label_confirmpassword)
                     .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(label_userrole)
+                    .addComponent(jCBuserrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
@@ -264,6 +277,7 @@ public class SignUp extends javax.swing.JFrame {
         String username = jTFusername.getText().trim();
         String password = new String(jPpassword.getPassword());
         String confirmPassword = new String(jPasswordField2.getPassword());
+        String userRole = (String) jCBuserrole.getSelectedItem();
         
         if (full_name.isEmpty() || gender.isEmpty() || email.isEmpty() || phone_number.isEmpty() ||
                 address.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
@@ -325,7 +339,7 @@ public class SignUp extends javax.swing.JFrame {
             }
             
 
-            String sql = "INSERT INTO users (full_name, gender, email, phone_number, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO users (full_name, gender, email, phone_number, address, username, password, user_role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, full_name);
             stmt.setString(2, gender);
@@ -334,6 +348,7 @@ public class SignUp extends javax.swing.JFrame {
             stmt.setString(5, address);
             stmt.setString(6, username);
             stmt.setString(7, password);
+            stmt.setString(8, userRole);
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -369,9 +384,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JButton jBlogin;
     private javax.swing.JButton jBsignup;
     private javax.swing.JComboBox<String> jCBgender;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> jCBuserrole;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPpassword;
@@ -381,6 +394,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField jTFphonenumber;
     private javax.swing.JTextField jTFusername;
     private javax.swing.JLabel label_address;
+    private javax.swing.JLabel label_confirmpassword;
     private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_fullname;
     private javax.swing.JLabel label_gender;
@@ -388,5 +402,6 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_phonenumber;
     private javax.swing.JLabel label_username;
+    private javax.swing.JLabel label_userrole;
     // End of variables declaration//GEN-END:variables
 }

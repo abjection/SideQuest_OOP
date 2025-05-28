@@ -33,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         jBlogin = new javax.swing.JButton();
         label_register = new javax.swing.JLabel();
         jBsignup = new javax.swing.JButton();
+        jCBmode = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -78,6 +79,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jCBmode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,7 +99,8 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(label_username)
                             .addComponent(label_password)
                             .addComponent(jPpassword)
-                            .addComponent(jBlogin, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jBlogin, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jCBmode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,7 +122,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_register)
                     .addComponent(jBsignup))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jCBmode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,7 +159,7 @@ public class Login extends javax.swing.JFrame {
             String url = "jdbc:MySQL://localhost:3306/java_user_database";
             Connection conn = DriverManager.getConnection(url, "root", "");
 
-            String sql = "SELECT password FROM users WHERE username = ?";
+            String sql = "SELECT password, user_role FROM users WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, enteredUsername);
 
@@ -164,7 +170,8 @@ public class Login extends javax.swing.JFrame {
                 if (storedPassword.equals(enteredPassword)) {
                     JOptionPane.showMessageDialog(this, "Login successful!");
                     this.currentUsername = enteredUsername;
-                    App appFrame = new App(this.currentUsername);
+                    String userRole = rs.getString("user_role");
+                    App appFrame = new App(this.currentUsername, userRole);
                     appFrame.setVisible(true);
                     appFrame.pack();
                     appFrame.setLocationRelativeTo(null);
@@ -227,6 +234,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBlogin;
     private javax.swing.JButton jBsignup;
+    private javax.swing.JComboBox<String> jCBmode;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPpassword;
     private javax.swing.JTextField jTFusername;

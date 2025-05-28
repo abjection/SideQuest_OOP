@@ -11,18 +11,25 @@ public class UserProfile extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UserProfile.class.getName());
     private Connection conn;
     private String currentUsername;
+    private String currentUserRole;
 
-    public UserProfile(String username) {
+    public UserProfile(String username, String userRole) {
         this.currentUsername = username;
+        this.currentUserRole = userRole;
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         connectToDatabase();
         loadUserProfile();
-        jTAuserinfo.setEditable(false);
+        
+        jTFuserrole.setText(currentUserRole);
+        jTFuserrole.setEditable(false);
+        
         jBsave.setVisible(false);
-
         jBedit.addActionListener( e -> {
-            jTAuserinfo.setEditable(true);
+            jTFfullname.setEditable(true);
+            jTFemail.setEditable(true);
+            jTFphonenumber.setEditable(true);
+            jTAaddress.setEditable(true);
             jBsave.setVisible(true);
     });
         
@@ -49,11 +56,15 @@ public class UserProfile extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                String userInfo = "Full Name: " + rs.getString("full_name") + "\n" +
-                                  "Email: " + rs.getString("email") + "\n" +
-                                  "Phone Number: " + rs.getString("phone_number") + "\n" +
-                                  "Address: " + rs.getString("address");
-                jTAuserinfo.setText(userInfo);
+                jTFfullname.setText(rs.getString("full_name"));
+                jTFemail.setText(rs.getString("email"));
+                jTFphonenumber.setText(rs.getString("phone_number"));
+                jTAaddress.setText(rs.getString("address"));
+                
+                jTFfullname.setEditable(false);
+                jTFemail.setEditable(false);
+                jTFphonenumber.setEditable(false);
+                jTAaddress.setEditable(false);
             } else {
                 JOptionPane.showMessageDialog(this, "User profile not found.");
             }
@@ -64,32 +75,31 @@ public class UserProfile extends javax.swing.JFrame {
     
     private void saveChanges() {
         try {
-        String[] userInfo = jTAuserinfo.getText().split("\n");
+        String fullName = jTFfullname.getText().trim();
+        String email = jTFemail.getText().trim();
+        String phoneNumber = jTFphonenumber.getText().trim();
+        String address = jTAaddress.getText().trim();
         
-        if (userInfo.length < 4) {
+        if (fullName.isEmpty() || email.isEmpty() || phoneNumber.isEmpty() || address.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please complete all user information fields.");
             return;
         }
         
-        String fullName = userInfo[0].split(": ")[1];
-        String email = userInfo[1].split(": ")[1];
-        String phoneNumber = userInfo[2].split(": ")[1];
-        String address = userInfo[3].split(": ")[1];
-        
-        String currentUsername = "current_user";
-        
-            String sql = "UPDATE users SET full_name = ?, email = ?, phone_number = ?, address = ? WHERE username = ?";
+        String sql = "UPDATE users SET full_name = ?, email = ?, phone_number = ?, address = ? WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, fullName);
             stmt.setString(2, email);
             stmt.setString(3, phoneNumber);
             stmt.setString(4, address);
             stmt.setString(5, this.currentUsername);
-            
+        
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(this, "Profile updated successfully!");
-                jTAuserinfo.setEditable(false);
+                jTFfullname.setEditable(false);
+                jTFemail.setEditable(false);
+                jTFphonenumber.setEditable(false);
+                jTAaddress.setEditable(false);
                 jBsave.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Profile update failed.");
@@ -135,12 +145,22 @@ public class UserProfile extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTAuserinfo = new javax.swing.JTextArea();
         jBedit = new javax.swing.JButton();
         jBsave = new javax.swing.JButton();
         jBdelete = new javax.swing.JButton();
         jBreturn = new javax.swing.JButton();
         label_userinfo = new javax.swing.JLabel();
+        label_fullname = new javax.swing.JLabel();
+        label_email = new javax.swing.JLabel();
+        label_phonenumber = new javax.swing.JLabel();
+        label_address = new javax.swing.JLabel();
+        jTFfullname = new javax.swing.JTextField();
+        jTFemail = new javax.swing.JTextField();
+        jTFphonenumber = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTAaddress = new javax.swing.JTextArea();
+        label_userrole = new javax.swing.JLabel();
+        jTFuserrole = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(12, 21, 52));
@@ -148,11 +168,7 @@ public class UserProfile extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(12, 21, 52));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(415, 590));
-
-        jTAuserinfo.setEditable(false);
-        jTAuserinfo.setColumns(20);
-        jTAuserinfo.setRows(5);
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 610));
 
         jBedit.setText("Edit");
 
@@ -167,28 +183,70 @@ public class UserProfile extends javax.swing.JFrame {
         label_userinfo.setForeground(new java.awt.Color(255, 255, 255));
         label_userinfo.setText("User Info");
 
+        label_fullname.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_fullname.setForeground(new java.awt.Color(255, 255, 255));
+        label_fullname.setText("Full Name:");
+
+        label_email.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_email.setForeground(new java.awt.Color(255, 255, 255));
+        label_email.setText("Email:");
+
+        label_phonenumber.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_phonenumber.setForeground(new java.awt.Color(255, 255, 255));
+        label_phonenumber.setText("Phone Number:");
+
+        label_address.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        label_address.setForeground(new java.awt.Color(255, 255, 255));
+        label_address.setText("Address:");
+
+        jTAaddress.setColumns(20);
+        jTAaddress.setRows(5);
+        jScrollPane1.setViewportView(jTAaddress);
+
+        label_userrole.setText("User Role:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_userinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(label_fullname)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFfullname, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTFphonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTFemail, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(label_address)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFuserrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jBdelete)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jBreturn))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jBedit)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jBsave))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(2, 2, 2)))))
+                .addGap(0, 9, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_userinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jBedit)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jBsave))
-                                .addComponent(jTAuserinfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBdelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBreturn)))
-                .addContainerGap())
+                    .addComponent(label_email)
+                    .addComponent(label_phonenumber)
+                    .addComponent(label_userrole))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,16 +254,34 @@ public class UserProfile extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(label_userinfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTAuserinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_fullname)
+                    .addComponent(jTFfullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_email)
+                    .addComponent(jTFemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_phonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFphonenumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_address)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_userrole)
+                    .addComponent(jTFuserrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBedit)
-                    .addComponent(jBsave))
-                .addGap(76, 76, 76)
+                    .addComponent(jBsave)
+                    .addComponent(jBedit))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBreturn)
-                    .addComponent(jBdelete))
-                .addContainerGap())
+                    .addComponent(jBdelete)
+                    .addComponent(jBreturn))
+                .addGap(96, 96, 96))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,9 +292,7 @@ public class UserProfile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -246,7 +320,7 @@ public class UserProfile extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new UserProfile("test_user").setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new UserProfile("test_user", "Employee").setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -255,7 +329,17 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton jBreturn;
     private javax.swing.JButton jBsave;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextArea jTAuserinfo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTAaddress;
+    private javax.swing.JTextField jTFemail;
+    private javax.swing.JTextField jTFfullname;
+    private javax.swing.JTextField jTFphonenumber;
+    private javax.swing.JTextField jTFuserrole;
+    private javax.swing.JLabel label_address;
+    private javax.swing.JLabel label_email;
+    private javax.swing.JLabel label_fullname;
+    private javax.swing.JLabel label_phonenumber;
     private javax.swing.JLabel label_userinfo;
+    private javax.swing.JLabel label_userrole;
     // End of variables declaration//GEN-END:variables
 }
