@@ -12,12 +12,14 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        jCBmode.setSelectedItem("User");
     }
     
     public Login(String prefillUsername) {
         initComponents();
         jTFusername.setText(prefillUsername);
         jTFusername.requestFocusInWindow();
+        jCBmode.setSelectedItem("User");
     }
 
     @SuppressWarnings("unchecked")
@@ -148,6 +150,7 @@ public class Login extends javax.swing.JFrame {
     private void jBloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBloginActionPerformed
         String enteredUsername = jTFusername.getText();
         String enteredPassword = new String(jPpassword.getPassword());
+        String selectedMode = (String) jCBmode.getSelectedItem();
 
         if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter both username and password.");
@@ -159,10 +162,10 @@ public class Login extends javax.swing.JFrame {
             String url = "jdbc:MySQL://localhost:3306/java_user_database";
             Connection conn = DriverManager.getConnection(url, "root", "");
 
-            String sql = "SELECT password, user_role FROM users WHERE username = ?";
+            String table = selectedMode.equals("Admin") ? "admin" : "users";
+            String sql = "SELECT password" + (table.equals("users") ? ", user_role" : "") + " FROM " + table + " WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, enteredUsername);
-
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -170,6 +173,10 @@ public class Login extends javax.swing.JFrame {
                 if (storedPassword.equals(enteredPassword)) {
                     JOptionPane.showMessageDialog(this, "Login successful!");
                     this.currentUsername = enteredUsername;
+                    
+                    if (selectedMode.equals("Admin")) {
+                        JOptionPane.showMessageDialog(this, "Welcome, Admin!");
+                    }
                     String userRole = rs.getString("user_role");
                     App appFrame = new App(this.currentUsername, userRole);
                     appFrame.setVisible(true);
