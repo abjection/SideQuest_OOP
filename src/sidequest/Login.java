@@ -175,13 +175,19 @@ public class Login extends javax.swing.JFrame {
                     this.currentUsername = enteredUsername;
                     
                     if (selectedMode.equals("Admin")) {
+                        AdminDashboard adminFrame = new AdminDashboard(this.currentUsername);
+                        adminFrame.setVisible(true);
+                        adminFrame.pack();
+                        adminFrame.setLocationRelativeTo(null);
+                        this.dispose();
                         JOptionPane.showMessageDialog(this, "Welcome, Admin!");
+                    } else {
+                        String userRole = rs.getString("user_role");
+                        App appFrame = new App(this.currentUsername, userRole);
+                        appFrame.setVisible(true);
+                        appFrame.pack();
+                        appFrame.setLocationRelativeTo(null);
                     }
-                    String userRole = rs.getString("user_role");
-                    App appFrame = new App(this.currentUsername, userRole);
-                    appFrame.setVisible(true);
-                    appFrame.pack();
-                    appFrame.setLocationRelativeTo(null);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Incorrect password.");

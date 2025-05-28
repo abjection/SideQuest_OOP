@@ -99,7 +99,7 @@ public class SignUp extends javax.swing.JFrame {
         label_confirmpassword.setForeground(new java.awt.Color(12, 21, 52));
         label_confirmpassword.setText("Confirm Password");
 
-        jBsignup.setForeground(new java.awt.Color(255, 255, 255));
+        jBsignup.setForeground(new java.awt.Color(0, 0, 0));
         jBsignup.setText("Sign Up");
         jBsignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +115,7 @@ public class SignUp extends javax.swing.JFrame {
         label_userrole.setForeground(new java.awt.Color(12, 21, 52));
         label_userrole.setText("User Role");
 
-        jCBgender.setForeground(new java.awt.Color(255, 255, 255));
+        jCBgender.setForeground(new java.awt.Color(0, 0, 0));
         jCBgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Prefer not to say" }));
 
         label_gender.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
@@ -126,7 +126,7 @@ public class SignUp extends javax.swing.JFrame {
         label_login.setForeground(new java.awt.Color(12, 21, 52));
         label_login.setText("I have an account");
 
-        jBlogin.setForeground(new java.awt.Color(255, 255, 255));
+        jBlogin.setForeground(new java.awt.Color(0, 0, 0));
         jBlogin.setText("Login");
         jBlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +134,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        jCBuserrole.setForeground(new java.awt.Color(255, 255, 255));
+        jCBuserrole.setForeground(new java.awt.Color(0, 0, 0));
         jCBuserrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employer", "Employee" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
