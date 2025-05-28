@@ -3,8 +3,10 @@ package sidequest;
 public class App extends javax.swing.JFrame {
     
     private UserProfile userProfileFrame;
+    private String currentUsername;
 
-    public App() {
+    public App(String username) {
+        this.currentUsername = username;
         initComponents();
     }
 
@@ -134,7 +136,7 @@ public class App extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -148,7 +150,7 @@ public class App extends javax.swing.JFrame {
 
     private void usericon_deletemeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usericon_deletemeMouseClicked
         if (userProfileFrame == null || !userProfileFrame.isVisible()) {
-            userProfileFrame = new UserProfile();
+            userProfileFrame = new UserProfile(currentUsername);
             userProfileFrame.setVisible(true);
             userProfileFrame.pack();
             userProfileFrame.setLocationRelativeTo(null);
@@ -187,7 +189,7 @@ public class App extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new App().setVisible(true);
+                new App("test_user").setVisible(true);
             }
         });
 }

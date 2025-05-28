@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class SignUp extends javax.swing.JFrame {
     
@@ -255,17 +256,33 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFphonenumberActionPerformed
 
     private void jBsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsignupActionPerformed
-        String full_name = jTFfullname.getText();
+        String full_name = jTFfullname.getText().trim();
         String gender = (String) jCBgender.getSelectedItem();
-        String email = jTFemail.getText();
-        String phone_number = jTFphonenumber.getText();
-        String address = jTFaddress.getText();
-        String id = jTFusername.getText();
+        String email = jTFemail.getText().trim();
+        String phone_number = jTFphonenumber.getText().trim();
+        String address = jTFaddress.getText().trim();
+        String username = jTFusername.getText().trim();
         String password = new String(jPpassword.getPassword());
         String confirmPassword = new String(jPasswordField2.getPassword());
+        
+        if (full_name.isEmpty() || gender.isEmpty() || email.isEmpty() || phone_number.isEmpty() ||
+                address.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all the fields.");
+            return;
+        }
+        
+        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
+            return;
+        }
 
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(this, "Passwords do not match.");
+            return;
+        }
+        
+        if (!phone_number.matches("\\d{11}")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid phone number (11 digits).");
             return;
         }
     
@@ -273,15 +290,49 @@ public class SignUp extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:MySQL://localhost:3306/java_user_database";
             Connection conn = DriverManager.getConnection(url, "root", "");
+            
+            String checkUsername = "SELECT * FROM users WHERE username = ?";
+            PreparedStatement checkUsernameStmt = conn.prepareStatement(checkUsername);
+            checkUsernameStmt.setString(1, username);
+            ResultSet userResult = checkUsernameStmt.executeQuery();
+            
+            if (userResult.next()) {
+                JOptionPane.showMessageDialog(this, "Username is already in use. Please choose another one");
+                conn.close();
+                return;
+            }
+            
+            String checkEmail = "SELECT * FROM users WHERE email = ?";
+            PreparedStatement checkEmailStmt = conn.prepareStatement (checkEmail);
+            checkEmailStmt.setString(1, email);
+            ResultSet emailResult = checkEmailStmt.executeQuery();
+            
+            if (emailResult.next()) {
+                JOptionPane.showMessageDialog(this, "Email is already in use.");
+                conn.close();
+                return;
+            }
+            
+            String checkPhoneNumber = "Select * FROM users WHERE phone_number = ?";
+            PreparedStatement checkPhoneNumStmt = conn.prepareStatement (checkPhoneNumber);
+            checkPhoneNumStmt.setString(1, phone_number);
+            ResultSet phonenumResult = checkPhoneNumStmt.executeQuery();
+            
+            if (phonenumResult.next()) {
+                JOptionPane.showMessageDialog(this, "Phone number is already taken.");
+                conn.close();
+                return;
+            }
+            
 
-            String sql = "INSERT INTO user (full_name, gender, email, phone_number, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO users (full_name, gender, email, phone_number, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, full_name);
             stmt.setString(2, gender);
             stmt.setString(3, email);
             stmt.setString(4, phone_number);
             stmt.setString(5, address);
-            stmt.setString(6, id);
+            stmt.setString(6, username);
             stmt.setString(7, password);
 
             int rowsInserted = stmt.executeUpdate();

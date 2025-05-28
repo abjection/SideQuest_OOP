@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Login extends javax.swing.JFrame {
+    
+    private String currentUsername;
 
     public Login() {
         initComponents();
@@ -151,7 +153,7 @@ public class Login extends javax.swing.JFrame {
             String url = "jdbc:MySQL://localhost:3306/java_user_database";
             Connection conn = DriverManager.getConnection(url, "root", "");
 
-            String sql = "SELECT password FROM user WHERE username = ?";
+            String sql = "SELECT password FROM users WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, enteredUsername);
 
@@ -161,7 +163,8 @@ public class Login extends javax.swing.JFrame {
                 String storedPassword = rs.getString("password");
                 if (storedPassword.equals(enteredPassword)) {
                     JOptionPane.showMessageDialog(this, "Login successful!");
-                    App appFrame = new App();
+                    this.currentUsername = enteredUsername;
+                    App appFrame = new App(this.currentUsername);
                     appFrame.setVisible(true);
                     appFrame.pack();
                     appFrame.setLocationRelativeTo(null);
