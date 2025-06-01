@@ -46,7 +46,7 @@ public class Login extends javax.swing.JFrame {
 
         label_title.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
         label_title.setForeground(new java.awt.Color(12, 21, 52));
-        label_title.setText("Placeholder");
+        label_title.setText("SideQuest");
         label_title.setMaximumSize(new java.awt.Dimension(250, 60));
         label_title.setMinimumSize(new java.awt.Dimension(250, 60));
 
@@ -95,14 +95,16 @@ public class Login extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBsignup))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(label_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTFusername, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                             .addComponent(label_username)
                             .addComponent(label_password)
                             .addComponent(jPpassword)
                             .addComponent(jBlogin, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addComponent(jCBmode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jCBmode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(label_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(13, 13, 13))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

@@ -21,6 +21,11 @@ public class SignUp extends javax.swing.JFrame {
 
     public SignUp() {
         initComponents();
+        jBdocument.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBdocumentActionPerformed(evt);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -50,6 +55,9 @@ public class SignUp extends javax.swing.JFrame {
         label_login = new javax.swing.JLabel();
         jBlogin = new javax.swing.JButton();
         jCBuserrole = new javax.swing.JComboBox<>();
+        label_document = new javax.swing.JLabel();
+        jBdocument = new javax.swing.JButton();
+        jTFdocumentpath = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +145,12 @@ public class SignUp extends javax.swing.JFrame {
         jCBuserrole.setForeground(new java.awt.Color(0, 0, 0));
         jCBuserrole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employer", "Employee" }));
 
+        label_document.setForeground(new java.awt.Color(0, 0, 0));
+        label_document.setText("Upload Document");
+
+        jBdocument.setForeground(new java.awt.Color(0, 0, 0));
+        jBdocument.setText("Upload");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,6 +158,12 @@ public class SignUp extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label_document)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBdocument)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFdocumentpath))
                     .addComponent(label_fullname)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(label_gender)
@@ -227,17 +247,17 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_userrole)
                     .addComponent(jCBuserrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                        .addComponent(jBsignup)
-                        .addGap(67, 67, 67))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBlogin)
-                            .addComponent(label_login))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_document)
+                    .addComponent(jBdocument)
+                    .addComponent(jTFdocumentpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBlogin)
+                    .addComponent(label_login)
+                    .addComponent(jBsignup))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -339,7 +359,7 @@ public class SignUp extends javax.swing.JFrame {
             }
             
 
-            String sql = "INSERT INTO users (full_name, gender, email, phone_number, address, username, password, user_role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO users (full_name, gender, email, phone_number, address, username, password, user_role, document_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, full_name);
             stmt.setString(2, gender);
@@ -349,9 +369,32 @@ public class SignUp extends javax.swing.JFrame {
             stmt.setString(6, username);
             stmt.setString(7, password);
             stmt.setString(8, userRole);
+            stmt.setString(9, selectedFile != null ? selectedFile.getAbsolutePath() : null);
 
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
+                if (selectedFile != null) {
+                    String saveDir = "uploads/";
+                    java.io.File dir = new java.io.File(saveDir);
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+                    
+                    String fileName = username + "_" + selectedFile.getName();
+                    java.io.File destinationFile = new java.io.File(dir, fileName);
+                    
+                    try {
+                        java.nio.file.Files.copy(
+                                selectedFile.toPath(),
+                                destinationFile.toPath(),
+                                java.nio.file.StandardCopyOption.REPLACE_EXISTING
+                        );
+                    } catch (java.io.IOException e) {
+                        JOptionPane.showMessageDialog(this, "Error saving document: " + e.getMessage());
+                        return;
+                    }
+                }
+                
                 JOptionPane.showMessageDialog(this, "Sign Up successful!");
                 Login LoginFrame = new Login();
                 LoginFrame.setVisible(true);
@@ -374,6 +417,23 @@ public class SignUp extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBloginActionPerformed
 
+    private void handleFileUpload() {
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogTitle("Select Document");
+        
+        javax.swing.filechooser.FileFilter filter = new javax.swing.filechooser.FileNameExtensionFilter("Documents (*.pdf, *.doc, *.docx)", "pdf", "doc", "docx");
+        fileChooser.setFileFilter(filter);
+        
+        int result = fileChooser.showOpenDialog(this);
+        if (result == javax.swing.JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile();
+            jTFdocumentpath.setText(selectedFile.getName());
+        }
+    }
+    
+    private void jBdocumentActionPerformed(java.awt.event.ActionEvent evt) {
+        handleFileUpload();
+    }
     /**
      * @param args the command line arguments
      */
@@ -381,6 +441,7 @@ public class SignUp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBdocument;
     private javax.swing.JButton jBlogin;
     private javax.swing.JButton jBsignup;
     private javax.swing.JComboBox<String> jCBgender;
@@ -389,12 +450,14 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JPasswordField jPpassword;
     private javax.swing.JTextField jTFaddress;
+    private javax.swing.JTextField jTFdocumentpath;
     private javax.swing.JTextField jTFemail;
     private javax.swing.JTextField jTFfullname;
     private javax.swing.JTextField jTFphonenumber;
     private javax.swing.JTextField jTFusername;
     private javax.swing.JLabel label_address;
     private javax.swing.JLabel label_confirmpassword;
+    private javax.swing.JLabel label_document;
     private javax.swing.JLabel label_email;
     private javax.swing.JLabel label_fullname;
     private javax.swing.JLabel label_gender;
@@ -404,4 +467,5 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel label_username;
     private javax.swing.JLabel label_userrole;
     // End of variables declaration//GEN-END:variables
+    private java.io.File selectedFile = null;
 }
