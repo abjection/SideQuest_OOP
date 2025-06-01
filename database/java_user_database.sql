@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2025 at 09:50 PM
+-- Generation Time: Jun 01, 2025 at 09:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,16 +59,9 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
   `address` text NOT NULL,
-  `user_role` varchar(50) NOT NULL DEFAULT 'Employee'
+  `user_role` varchar(50) NOT NULL DEFAULT 'Employee',
+  `document_path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `gender`, `email`, `phone_number`, `address`, `user_role`) VALUES
-(9, 'edrussell00', '123456', 'Ed', 'Male', 'russell@email.com', '09123456798', 'Kalsada St.', 'Employee'),
-(10, 'russell00', '123456', 'Russell', 'Male', 'edrussell@email.com', '09123456789', 'Street Street', 'Employer');
 
 --
 -- Indexes for dumped tables
@@ -101,7 +94,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
