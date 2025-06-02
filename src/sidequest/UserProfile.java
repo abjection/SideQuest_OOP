@@ -12,10 +12,12 @@ public class UserProfile extends javax.swing.JFrame {
     private Connection conn;
     private String currentUsername;
     private String currentUserRole;
+    private App parentApp;
 
-    public UserProfile(String username, String userRole) {
+    public UserProfile(String username, String userRole, App parentApp) {
         this.currentUsername = username;
         this.currentUserRole = userRole;
+        this.parentApp = parentApp;
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         connectToDatabase();
@@ -127,9 +129,12 @@ public class UserProfile extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Account deleted successfully.");
                     if (stmt != null) stmt.close();
                     if (conn != null) conn.close();
+                    if (parentApp != null) parentApp.dispose();
                     dispose();
                     java.awt.EventQueue.invokeLater(() -> {
-                        new Login().setVisible(true);
+                        Login loginFrame = new Login();
+                        loginFrame.setVisible(true);
+                        loginFrame.setLocationRelativeTo(null);
                     });
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to delete account.");
@@ -335,7 +340,7 @@ public class UserProfile extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new UserProfile("test_user", "Employee").setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new UserProfile("test_user", "Employee", null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
