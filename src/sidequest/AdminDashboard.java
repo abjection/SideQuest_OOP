@@ -1,5 +1,13 @@
 package sidequest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class AdminDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashboard.class.getName());
@@ -9,7 +17,131 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.currentUsername = username;
         initComponents();
         setTitle("Admin Dashboard - " + currentUsername);
+        
+        label_currentuser.setText("Welcome, " + currentUsername);
+        
+        jBlogout.addActionListener(e -> {
+            int result = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+                    "Are you sure you want to logout?",
+                    "Confirm Logout",
+                    javax.swing.JOptionPane.YES_NO_OPTION,
+                    javax.swing.JOptionPane.QUESTION_MESSAGE
+            );
+            if (result == javax.swing.JOptionPane.YES_OPTION) {
+                Login newLogin = new Login();
+                newLogin.setVisible(true);
+                newLogin.setLocationRelativeTo(null);
+                this.dispose();
+            }
+        });
+        
+        jBsearch.addActionListener(e -> searchUsers());
+        
+        jTFsearch.addActionListener(e -> searchUsers());
+        
+        jCBrole.addActionListener(e -> searchUsers());
+        
+        startClock();
+        
+        updateDashboardCounts();
+        
+        searchUsers();
+        
     }
+        private void startClock() {
+               String pattern = "EEEE, MMMM dd, yyyy hh:mm:ss a";
+               SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+               label_timedate.setText(sdf.format(new Date()));
+
+               Timer timer = new Timer(1000,e -> {
+                   label_timedate.setText(sdf.format(new Date()));
+            });
+            timer.start();
+    }
+        
+        private void updateDashboardCounts() {
+            label_count.setText(getUserCount("users"));
+            label_countemployers.setText(getRoleCount("Employer"));
+            label_countemployees.setText(getRoleCount("Employee"));
+            label_countemployees1.setText(getActiveUserCount());
+        }
+        
+        private String getUserCount(String table) {
+            int count = 0;
+            try (Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/java_user_database", "root", "")) {
+                String sql = "SELECT COUNT(*) FROM " + table;
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                count = 0;
+            }
+            return String.valueOf(count);
+        }
+        
+        private String getRoleCount(String role) {
+            int count = 0;
+            try (Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/java_user_database", "root", "")) {
+                String sql = "SELECT COUNT(*) FROM users WHERE user_role = ? ";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, role);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                count = 0;
+            }
+            return String.valueOf(count);
+        }
+        
+        private String getActiveUserCount() {
+            int count = 0;
+            try (Connection conn = DriverManager.getConnection("jdbc:MySQL://localhost:3306/java_user_database", "root", "")) {
+                String sql = "SELECT COUNT(*) FROM users WHERE active = 1 ";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            } catch (Exception e) {
+                count = 0;
+            }
+            return String.valueOf(count);
+        }
+        
+        private void searchUsers() {
+            String keyword = jTFsearch.getText().trim();
+            String selectedRole = jCBrole.getSelectedItem().toString();
+            
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            
+            try (java.sql.Connection conn = java.sql.DriverManager.getConnection("jdbc:MySQL://localhost:3306/java_user_database", "root", "")) {
+                String sql = "SELECT id, username, full_name, user_role, registration_date FROM users WHERE (username LIKE ? OR full_name LIKE ?) AND user_role = ?";
+                java.sql.PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, "%" + keyword + "%");
+                stmt.setString(2, "%" + keyword + "%");
+                stmt.setString(3, selectedRole); 
+                
+                java.sql.ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Object[] row = {
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("full_name"),
+                        rs.getString("user_role"),
+                        rs.getString("registration_date")
+                    };
+                    model.addRow(row);
+                }
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Search failed: " + e.getMessage());
+            }
+            }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,7 +379,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Username", "Name", "Role", "Date"
+                "ID", "Username", "Name", "Role", "Registration Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -279,13 +411,13 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(label_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
+                        .addGap(107, 107, 107)
                         .addComponent(label_timedate)
-                        .addGap(164, 164, 164)
+                        .addGap(153, 153, 153)
                         .addComponent(label_currentuser)
-                        .addGap(144, 144, 144)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBlogout)
-                        .addGap(72, 80, Short.MAX_VALUE))
+                        .addGap(99, 99, 99))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -308,7 +440,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(552, 552, 552)
                                 .addComponent(label_usertable)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 74, Short.MAX_VALUE))
                     .addComponent(jSeparator2))
                 .addContainerGap())
         );
