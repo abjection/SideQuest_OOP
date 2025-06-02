@@ -81,6 +81,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jCBmode.setForeground(new java.awt.Color(12, 21, 52));
         jCBmode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
