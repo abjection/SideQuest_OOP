@@ -7,12 +7,65 @@ public class App extends javax.swing.JFrame {
     private String currentUserRole;
     private App parentApp;
     
-
+    private java.awt.CardLayout cardLayout;
+    private javax.swing.JPanel homePanel;
+    private javax.swing.JPanel acceptedPanel;
+    private javax.swing.JPanel historyPanel;
+    
     public App(String username, String userRole) {
         this.currentUsername = username;
         this.currentUserRole = userRole;
         this.parentApp = parentApp;
         initComponents();
+        
+        cardLayout = new java.awt.CardLayout();
+        jPactivities.setLayout(cardLayout);
+        
+        homePanel = new javax.swing.JPanel();
+        homePanel.add(new javax.swing.JLabel("Welcome to Home!"));
+        
+        acceptedPanel = new javax.swing.JPanel();
+        acceptedPanel.add(new javax.swing.JLabel("This is your Accepted Listings."));
+        
+        historyPanel = new javax.swing.JPanel();
+        historyPanel.add(new javax.swing.JLabel("This is your History."));
+        
+        jPactivities.add(homePanel, "HOME");
+        jPactivities.add(acceptedPanel, "ACCEPTED");
+        jPactivities.add(historyPanel, "HISTORY");
+        
+        jBhome.addActionListener(e -> showHome());
+        jBaccepted.addActionListener(e -> showAcceptedListings());
+        jBhistory.addActionListener(e -> showHistory());
+    }
+    
+    private void showCard(String cardName, String label) {
+        label_homepage.setText(label);
+        cardLayout.show(jPactivities, cardName);
+    }
+    
+    private void showHome() {
+        label_homepage.setText("Homepage");
+        jPactivities.removeAll();
+        jPactivities.add(new javax.swing.JLabel("Welcome to Home!"));
+        jPactivities.revalidate();
+        jPactivities.repaint();
+    }
+    
+    private void showAcceptedListings() {
+        label_homepage.setText("Accepted Listings");
+        jPactivities.removeAll();
+        jPactivities.add(new javax.swing.JLabel("This is your Accepted Listings"));
+        jPactivities.revalidate();
+        jPactivities.repaint();
+    }
+    
+    private void showHistory() {
+        label_homepage.setText("History");
+        jPactivities.removeAll();
+        jPactivities.add(new javax.swing.JLabel("This is your History"));
+        jPactivities.revalidate();
+        jPactivities.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -23,9 +76,8 @@ public class App extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         label_homepage = new javax.swing.JLabel();
         jTFsearchbar = new javax.swing.JTextField();
-        usericon_deleteme = new javax.swing.JLabel();
+        label_usericon = new javax.swing.JLabel();
         jPactivities = new javax.swing.JPanel();
-        placeholder_deleteme1 = new javax.swing.JLabel();
         jPsidebuttons = new javax.swing.JPanel();
         jBhistory = new javax.swing.JButton();
         jBhome = new javax.swing.JButton();
@@ -41,39 +93,31 @@ public class App extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(12, 21, 52));
         jPanel1.setPreferredSize(new java.awt.Dimension(1200, 800));
 
-        label_homepage.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        label_homepage.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         label_homepage.setForeground(new java.awt.Color(255, 255, 255));
         label_homepage.setText("Homepage");
 
         jTFsearchbar.setText("Search");
 
-        usericon_deleteme.setForeground(new java.awt.Color(255, 255, 255));
-        usericon_deleteme.setIcon(new javax.swing.ImageIcon("C:\\Users\\Russell\\Documents\\NetBeansProjects\\SideQuest\\assets\\user.png")); // NOI18N
-        usericon_deleteme.setMinimumSize(new java.awt.Dimension(628, 512));
-        usericon_deleteme.setPreferredSize(new java.awt.Dimension(512, 512));
-        usericon_deleteme.addMouseListener(new java.awt.event.MouseAdapter() {
+        label_usericon.setForeground(new java.awt.Color(255, 255, 255));
+        label_usericon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Russell\\Documents\\NetBeansProjects\\SideQuest\\assets\\user.png")); // NOI18N
+        label_usericon.setMinimumSize(new java.awt.Dimension(628, 512));
+        label_usericon.setPreferredSize(new java.awt.Dimension(512, 512));
+        label_usericon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                usericon_deletemeMouseClicked(evt);
+                label_usericonMouseClicked(evt);
             }
         });
-
-        placeholder_deleteme1.setText("mainpanel_placeholder_toberemoved");
 
         javax.swing.GroupLayout jPactivitiesLayout = new javax.swing.GroupLayout(jPactivities);
         jPactivities.setLayout(jPactivitiesLayout);
         jPactivitiesLayout.setHorizontalGroup(
             jPactivitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPactivitiesLayout.createSequentialGroup()
-                .addGap(248, 248, 248)
-                .addComponent(placeholder_deleteme1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
+            .addGap(0, 702, Short.MAX_VALUE)
         );
         jPactivitiesLayout.setVerticalGroup(
             jPactivitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPactivitiesLayout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(placeholder_deleteme1)
-                .addContainerGap(161, Short.MAX_VALUE))
+            .addGap(0, 374, Short.MAX_VALUE)
         );
 
         jBhistory.setText("History");
@@ -82,7 +126,7 @@ public class App extends javax.swing.JFrame {
 
         jBaccepted.setText("Accepted Listings");
 
-        jButton4.setText("jButton1");
+        jButton4.setText("Settings");
 
         javax.swing.GroupLayout jPsidebuttonsLayout = new javax.swing.GroupLayout(jPsidebuttons);
         jPsidebuttons.setLayout(jPsidebuttonsLayout);
@@ -131,7 +175,7 @@ public class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBsearchbutton)
                         .addGap(175, 175, 175)
-                        .addComponent(usericon_deleteme, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(label_usericon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +191,7 @@ public class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(usericon_deleteme, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label_usericon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPsidebuttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +218,7 @@ public class App extends javax.swing.JFrame {
         // gawing icon yung button or okay na yung search 
     }//GEN-LAST:event_jBsearchbuttonActionPerformed
 
-    private void usericon_deletemeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usericon_deletemeMouseClicked
+    private void label_usericonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_usericonMouseClicked
         if (userProfileFrame == null || !userProfileFrame.isVisible()) {
             userProfileFrame = new UserProfile(currentUsername, currentUserRole, this);
             userProfileFrame.setVisible(true);
@@ -184,7 +228,7 @@ public class App extends javax.swing.JFrame {
             userProfileFrame.toFront();
             userProfileFrame.requestFocus();
         }
-    }//GEN-LAST:event_usericon_deletemeMouseClicked
+    }//GEN-LAST:event_label_usericonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,7 +276,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JTextField jTFsearchbar;
     private javax.swing.JLabel label_homepage;
-    private javax.swing.JLabel placeholder_deleteme1;
-    private javax.swing.JLabel usericon_deleteme;
+    private javax.swing.JLabel label_usericon;
     // End of variables declaration//GEN-END:variables
 }
