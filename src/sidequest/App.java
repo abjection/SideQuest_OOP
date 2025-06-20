@@ -37,6 +37,8 @@ public class App extends javax.swing.JFrame {
         jBhome.addActionListener(e -> showHome());
         jBaccepted.addActionListener(e -> showAcceptedListings());
         jBhistory.addActionListener(e -> showHistory());
+        
+        showHome();
     }
     
     private void showHome() {
