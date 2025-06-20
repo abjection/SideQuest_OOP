@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JRadioButtonMenuItem" name="jRadioButtonMenuItem1">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="jRadioButtonMenuItem1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,12 +31,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" pref="980" max="-2" attributes="0"/>
+          <Component id="jPanel1" min="-2" pref="964" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" pref="566" max="-2" attributes="0"/>
+          <Component id="jPanel1" min="-2" pref="490" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -47,25 +55,25 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Component id="jPsidebuttons" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPactivities" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="label_homepage" min="-2" pref="249" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                           <Component id="jTFsearchbar" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jBsearchbutton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
                           <Component id="usericon_deleteme" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace pref="19" max="32767" attributes="0"/>
-                          <Component id="jPsidebuttons" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jPactivities" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,11 +96,11 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPactivities" max="32767" attributes="0"/>
-                      <Component id="jPsidebuttons" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPsidebuttons" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPactivities" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="451" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="438" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -141,7 +149,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
                       <Component id="placeholder_deleteme1" min="-2" pref="214" max="-2" attributes="0"/>
-                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                      <EmptySpace pref="240" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -150,7 +158,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                       <Component id="placeholder_deleteme1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="161" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -168,27 +176,45 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="placeholder_deleteme" pref="197" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jBhome" max="32767" attributes="0"/>
+                  <Component id="jBaccepted" alignment="0" pref="221" max="32767" attributes="0"/>
+                  <Component id="jBhistory" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                      <Component id="placeholder_deleteme" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="236" max="32767" attributes="0"/>
+                      <Component id="jBhome" min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jBaccepted" min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jBhistory" min="-2" pref="89" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton4" min="-2" pref="89" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="placeholder_deleteme">
+            <Component class="javax.swing.JButton" name="jBhistory">
               <Properties>
-                <Property name="text" type="java.lang.String" value="sidepanel_placeholder_toberemoved"/>
+                <Property name="text" type="java.lang.String" value="History"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jBhome">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Home"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jBaccepted">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Accepted Listings"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jButton1"/>
               </Properties>
             </Component>
           </SubComponents>

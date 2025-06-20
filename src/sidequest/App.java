@@ -19,6 +19,7 @@ public class App extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         label_homepage = new javax.swing.JLabel();
         jTFsearchbar = new javax.swing.JTextField();
@@ -26,8 +27,14 @@ public class App extends javax.swing.JFrame {
         jPactivities = new javax.swing.JPanel();
         placeholder_deleteme1 = new javax.swing.JLabel();
         jPsidebuttons = new javax.swing.JPanel();
-        placeholder_deleteme = new javax.swing.JLabel();
+        jBhistory = new javax.swing.JButton();
+        jBhome = new javax.swing.JButton();
+        jBaccepted = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jBsearchbutton = new javax.swing.JButton();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,33 +66,43 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPactivitiesLayout.createSequentialGroup()
                 .addGap(248, 248, 248)
                 .addComponent(placeholder_deleteme1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPactivitiesLayout.setVerticalGroup(
             jPactivitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPactivitiesLayout.createSequentialGroup()
                 .addGap(197, 197, 197)
                 .addComponent(placeholder_deleteme1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
-        placeholder_deleteme.setText("sidepanel_placeholder_toberemoved");
+        jBhistory.setText("History");
+
+        jBhome.setText("Home");
+
+        jBaccepted.setText("Accepted Listings");
+
+        jButton4.setText("jButton1");
 
         javax.swing.GroupLayout jPsidebuttonsLayout = new javax.swing.GroupLayout(jPsidebuttons);
         jPsidebuttons.setLayout(jPsidebuttonsLayout);
         jPsidebuttonsLayout.setHorizontalGroup(
             jPsidebuttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPsidebuttonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(placeholder_deleteme, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jBhome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jBaccepted, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+            .addComponent(jBhistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPsidebuttonsLayout.setVerticalGroup(
             jPsidebuttonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPsidebuttonsLayout.createSequentialGroup()
-                .addGap(206, 206, 206)
-                .addComponent(placeholder_deleteme)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addComponent(jBhome, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBaccepted, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBhistory, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jBsearchbutton.setText("Search");
@@ -100,22 +117,22 @@ public class App extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jPsidebuttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPactivities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(label_homepage, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145)
+                        .addGap(182, 182, 182)
                         .addComponent(jTFsearchbar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBsearchbutton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(usericon_deleteme, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jPsidebuttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPactivities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                        .addGap(175, 175, 175)
+                        .addComponent(usericon_deleteme, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,21 +149,21 @@ public class App extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(usericon_deleteme, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPactivities, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPsidebuttons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(451, 451, 451))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPsidebuttons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPactivities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(438, 438, 438))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -204,13 +221,17 @@ public class App extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBaccepted;
+    private javax.swing.JButton jBhistory;
+    private javax.swing.JButton jBhome;
     private javax.swing.JButton jBsearchbutton;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPactivities;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPsidebuttons;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JTextField jTFsearchbar;
     private javax.swing.JLabel label_homepage;
-    private javax.swing.JLabel placeholder_deleteme;
     private javax.swing.JLabel placeholder_deleteme1;
     private javax.swing.JLabel usericon_deleteme;
     // End of variables declaration//GEN-END:variables
