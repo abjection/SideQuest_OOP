@@ -22,13 +22,13 @@ public class App extends javax.swing.JFrame {
         jPactivities.setLayout(cardLayout);
         
         homePanel = new javax.swing.JPanel();
-        homePanel.add(new javax.swing.JLabel("Welcome to Home!"));
+        homePanel.add(new javax.swing.JLabel("Current available listings"));
         
         acceptedPanel = new javax.swing.JPanel();
-        acceptedPanel.add(new javax.swing.JLabel("This is your Accepted Listings."));
+        acceptedPanel.add(new javax.swing.JLabel("This is your Accepted Listings"));
         
         historyPanel = new javax.swing.JPanel();
-        historyPanel.add(new javax.swing.JLabel("This is your History."));
+        historyPanel.add(new javax.swing.JLabel("This is your History"));
         
         jPactivities.add(homePanel, "HOME");
         jPactivities.add(acceptedPanel, "ACCEPTED");
@@ -39,33 +39,19 @@ public class App extends javax.swing.JFrame {
         jBhistory.addActionListener(e -> showHistory());
     }
     
-    private void showCard(String cardName, String label) {
-        label_homepage.setText(label);
-        cardLayout.show(jPactivities, cardName);
-    }
-    
     private void showHome() {
         label_homepage.setText("Homepage");
-        jPactivities.removeAll();
-        jPactivities.add(new javax.swing.JLabel("Welcome to Home!"));
-        jPactivities.revalidate();
-        jPactivities.repaint();
+        cardLayout.show(jPactivities, "HOME");
     }
     
     private void showAcceptedListings() {
         label_homepage.setText("Accepted Listings");
-        jPactivities.removeAll();
-        jPactivities.add(new javax.swing.JLabel("This is your Accepted Listings"));
-        jPactivities.revalidate();
-        jPactivities.repaint();
+        cardLayout.show(jPactivities, "ACCEPTED");
     }
     
     private void showHistory() {
         label_homepage.setText("History");
-        jPactivities.removeAll();
-        jPactivities.add(new javax.swing.JLabel("This is your History"));
-        jPactivities.revalidate();
-        jPactivities.repaint();
+        cardLayout.show(jPactivities, "HISTORY");
     }
 
     @SuppressWarnings("unchecked")
